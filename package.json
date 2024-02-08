@@ -1,0 +1,28 @@
+{
+  "name": "nodegen",
+  "version": "0.0.1",
+  "description": "A Node.js CLI tool for generating reusable backend code.",
+  "main": "dist/index.js",
+  "bin": {
+    "nodegen": "./index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "tsc && node dist/index.js"
+  },
+  "keywords": [
+    "node",
+    "cli",
+    "generator",
+    "backend",
+    "code"
+  ],
+  "authors": [
+    "Diwanshu <saidiwanshu1880@gmail.com>"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
