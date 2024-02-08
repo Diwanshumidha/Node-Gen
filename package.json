@@ -1,28 +1,37 @@
 {
-  "name": "nodegen",
-  "version": "0.0.1",
-  "description": "A Node.js CLI tool for generating reusable backend code.",
-  "main": "dist/index.js",
-  "bin": {
-    "nodegen": "./index.js"
-  },
-  "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "start": "tsc && node dist/index.js"
-  },
-  "keywords": [
-    "node",
-    "cli",
-    "generator",
-    "backend",
-    "code"
-  ],
-  "authors": [
-    "Diwanshu <saidiwanshu1880@gmail.com>"
-  ],
-  "license": "ISC",
-  "devDependencies": {
-    "typescript": "^5.3.3"
-  }
+    "name": "nodegen",
+    "version": "0.0.1",
+    "description": "A Node.js CLI tool for generating reusable backend code.",
+    "main": "dist/index.js",
+    "bin": {
+        "nodegen": "./index.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "start": "tsc && node dist/index.js",
+        "format:check": "prettier --check .",
+        "format:write": "prettier --write .",
+        "lint:check": "eslint .",
+        "lint:fix": "eslint --fix ."
+    },
+    "keywords": [
+        "node",
+        "cli",
+        "generator",
+        "backend",
+        "code"
+    ],
+    "authors": [
+        "Diwanshu <saidiwanshu1880@gmail.com>"
+    ],
+    "license": "ISC",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^6.21.0",
+        "@typescript-eslint/parser": "^6.21.0",
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "prettier": "^3.2.5",
+        "typescript": "^5.3.3"
+    }
 }
