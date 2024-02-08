@@ -28,7 +28,7 @@
     "authors": [
         "Diwanshu <saidiwanshu1880@gmail.com>"
     ],
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^6.21.0",
         "@typescript-eslint/parser": "^6.21.0",
