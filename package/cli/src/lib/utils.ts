@@ -11,11 +11,7 @@ export const color = {
     green: (string: string) => chalk.green(string),
 }
 
-export function ErrorHandler(
-    error: unknown,
-    fallback?: string,
-    doExit = false
-) {
+export function ErrorHandler(error: unknown, fallback?: string, doExit = true) {
     let StringifiedError: string =
         fallback || 'Error: There Was an Unknown Error!'
 
@@ -46,4 +42,13 @@ export async function createFile(
     } catch (err) {
         ErrorHandler(err, `Error While Creating ${fileName}:`)
     }
+}
+
+export function formatPackageName(input: string): string {
+    const sanitized = input.replace(/[^a-zA-Z0-9-]/g, '-')
+    const lowercase = sanitized.toLowerCase()
+    const validName = lowercase.match(
+        /^(?:(?:@(?:[a-z0-9-*~][a-z0-9-*._~]*)?\/[a-z0-9-._~])|[a-z0-9-~])[a-z0-9-._~]*$/
+    )
+    return validName ? validName[0] : input
 }
