@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 import { program } from 'commander'
+import { ErrorHandler, color, createFile } from './lib/utils.js'
 
-function AddCommand() {}
+async function AddCommand() {
+    try {
+        console.log('hello')
+    } catch (error) {
+        ErrorHandler(error)
+    }
+}
 
 program
     .name('add')
