@@ -26,7 +26,8 @@
         "code"
     ],
     "authors": [
-        "Diwanshu <saidiwanshu1880@gmail.com>"
+        "Diwanshu <saidiwanshu1880@gmail.com>",
+        "Shishiro <dheeravathshishiro@gmail.com>"
     ],
     "license": "MIT",
     "devDependencies": {
