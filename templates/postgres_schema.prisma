@@ -1,19 +1,16 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mongodb"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
 model User {
-    id         String   @id @default(auto()) @map("_id") @db.ObjectId
+    id         String   @id @default(uuid())
     email      String   @unique
-    Username   String   @unique
+    username   String   @unique
     password   String
     image      String?
     isVerified Boolean  @default(false)
@@ -22,9 +19,11 @@ model User {
 }
 
 model OTP {
-    id        String   @id @default(auto()) @map("_id") @db.ObjectId
-    email     String   @unique
+    id        String   @id @default(uuid())
+    email     String
     otp       String
     createdAt DateTime @default(now())
     expiresAt DateTime
+
+    @@unique([email, expiresAt])
 }

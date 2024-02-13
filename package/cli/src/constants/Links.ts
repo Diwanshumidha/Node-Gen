@@ -7,7 +7,6 @@ export const TS_GITHUB_URL_PRISMA =
 
 export const DATABASES = [
     { label: 'MongoDB', key: 'mongodb' },
-    { label: 'MySQL', key: 'mysql' },
     { label: 'Postgres', key: 'postgres' },
 ] as const
 

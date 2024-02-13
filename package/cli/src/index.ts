@@ -10,7 +10,7 @@ import {
 } from './lib/init.js'
 import { ConfigSchema } from './constants/Links.js'
 import { cwd } from 'process'
-import { intro } from '@clack/prompts'
+import { intro, outro } from '@clack/prompts'
 
 async function InitCommand() {
     try {
@@ -22,6 +22,8 @@ async function InitCommand() {
         process.chdir(config.AppName)
         await FixPackageJsonName(config.AppName)
         await FIX_ENV_FILE(config.AppName, '.env.example')
+        outro('Successfully Created The App')
+        console.log(`Run: \ncd ${config.AppName}\nnpm install`)
     } catch (error) {
         ErrorHandler(error)
     }

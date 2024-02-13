@@ -2,7 +2,6 @@ import { ErrorHandler, color, formatPackageName } from './utils.js'
 import { $ } from 'execa'
 import { rimraf } from 'rimraf'
 import fs from 'fs-extra'
-import path from 'path'
 import {
     spinner,
     text,
@@ -123,12 +122,11 @@ export const CloneFromGithub = async (
 ) => {
     try {
         const spin = spinner()
-        spin.start('Cloning The Template......')
+        spin.start('Initializing The  Application...')
         await $`git clone --depth 1 ${repositoryUrl} ${appName}`
         const gitFolderPath = `${appName}/.git`
-        console.log('Removing .git')
         await rimraf(gitFolderPath)
-        spin.stop('Successfully Cloned The Repo')
+        spin.stop('Successfully Initialized the App')
     } catch (error) {
         ErrorHandler(error, 'Error While Cloning To Github', true)
     }
@@ -142,8 +140,8 @@ export const ADD_DATABASE_MODEL = async () => {
 }
 
 export const FixPackageJsonName = async (AppName: string) => {
+    const spin = spinner()
     try {
-        const spin = spinner()
         spin.start('Making Config Changes.....')
         const filePath = 'package.json'
         const currentContent = await fs.promises.readFile(filePath, 'utf-8')
@@ -155,14 +153,19 @@ export const FixPackageJsonName = async (AppName: string) => {
 
         spin.stop('Successfully Config Changes are Done')
     } catch (err) {
-        ErrorHandler(err, `Error While Replacing Content in Package.json:`)
+        ErrorHandler(
+            err,
+            `Error While Replacing Content in Package.json:`,
+            false
+        )
+        spin.stop()
     }
 }
 
 export const FIX_ENV_FILE = async (AppName: string, ENV_PATH: string) => {
+    const spin = spinner()
     try {
-        const spin = spinner()
-        spin.start('Making Config Changes.....')
+        spin.start('Finalizing The App')
         const currentContent = await fs.promises.readFile(ENV_PATH, 'utf-8')
         const updatedContent = currentContent.replace(
             /\[APP_NAME\]/g,
@@ -170,8 +173,13 @@ export const FIX_ENV_FILE = async (AppName: string, ENV_PATH: string) => {
         )
         await fs.promises.writeFile(ENV_PATH, updatedContent)
 
-        spin.stop('Successfully Config Changes are Done')
+        spin.stop('Successfully Finalized the App')
     } catch (err) {
-        ErrorHandler(err, `Error While Replacing Content in Package.json:`)
+        ErrorHandler(
+            err,
+            `Error While Replacing Content in Package.json:`,
+            false
+        )
+        spin.stop()
     }
 }

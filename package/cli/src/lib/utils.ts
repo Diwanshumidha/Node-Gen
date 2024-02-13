@@ -22,7 +22,7 @@ export function ErrorHandler(error: unknown, fallback?: string, doExit = true) {
         StringifiedError = String(error.message)
     }
 
-    console.error(color.error(StringifiedError))
+    doExit && console.error(color.error(StringifiedError))
     // Cleanup Function Goes Here
     doExit && process.exit(1)
 }
