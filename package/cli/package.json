@@ -1,6 +1,6 @@
 {
     "name": "nodgen",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "A Node.js CLI tool for generating reusable backend code.",
     "main": "dist/index.js",
     "bin": {

@@ -1,4 +1,10 @@
-import { ErrorHandler, color, formatPackageName } from './utils.js'
+import {
+    ErrorHandler,
+    Fetch_Github_Template,
+    color,
+    formatPackageName,
+    replaceFileContent,
+} from './utils.js'
 import { $ } from 'execa'
 import { rimraf } from 'rimraf'
 import fs from 'fs-extra'
@@ -15,6 +21,7 @@ import {
     DATABASES,
     JS_GITHUB_URL,
     JS_GITHUB_URL_PRISMA,
+    PRISMA_SCHEMA_FILE_PATH,
     TS_GITHUB_URL,
     TS_GITHUB_URL_PRISMA,
 } from '../constants/Links.js'
@@ -132,10 +139,21 @@ export const CloneFromGithub = async (
     }
 }
 
-export const ADD_DATABASE_MODEL = async () => {
+export const ADD_DATABASE_MODEL = async (config: ConfigSchema) => {
+    if (config.ORM !== 'prisma') return
+    const spin = spinner()
     try {
+        spin.start('Adding Database Model')
+        const content = await Fetch_Github_Template(config.database)
+        if (content) {
+            await replaceFileContent(PRISMA_SCHEMA_FILE_PATH, content)
+        }
+        spin.stop('Successfully Added Database Model')
     } catch (error) {
-        ErrorHandler(error, 'Failed to add database model')
+        ErrorHandler(error)
+        spin.stop(
+            'Failed To Add Database Model. Please Manually add it From Docs'
+        )
     }
 }
 
