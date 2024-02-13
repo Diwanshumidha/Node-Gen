@@ -14,7 +14,6 @@ export const color = {
 export function ErrorHandler(error: unknown, fallback?: string, doExit = true) {
     let StringifiedError: string =
         fallback || 'Error: There Was an Unknown Error!'
-
     if (typeof error === 'string') {
         StringifiedError = error
     } else if (error instanceof Error) {

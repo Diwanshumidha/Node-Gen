@@ -134,6 +134,13 @@ export const CloneFromGithub = async (
     }
 }
 
+export const ADD_DATABASE_MODEL = async () => {
+    try {
+    } catch (error) {
+        ErrorHandler(error, 'Failed to add database model')
+    }
+}
+
 export const FixPackageJsonName = async (AppName: string) => {
     try {
         const spin = spinner()
@@ -145,6 +152,23 @@ export const FixPackageJsonName = async (AppName: string) => {
             formatPackageName(AppName)
         )
         await fs.promises.writeFile(filePath, updatedContent)
+
+        spin.stop('Successfully Config Changes are Done')
+    } catch (err) {
+        ErrorHandler(err, `Error While Replacing Content in Package.json:`)
+    }
+}
+
+export const FIX_ENV_FILE = async (AppName: string, ENV_PATH: string) => {
+    try {
+        const spin = spinner()
+        spin.start('Making Config Changes.....')
+        const currentContent = await fs.promises.readFile(ENV_PATH, 'utf-8')
+        const updatedContent = currentContent.replace(
+            /\[APP_NAME\]/g,
+            formatPackageName(AppName)
+        )
+        await fs.promises.writeFile(ENV_PATH, updatedContent)
 
         spin.stop('Successfully Config Changes are Done')
     } catch (err) {

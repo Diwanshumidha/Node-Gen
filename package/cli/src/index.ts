@@ -3,6 +3,7 @@ import { program } from 'commander'
 import { ErrorHandler, color, createFile } from './lib/utils.js'
 import {
     CloneFromGithub,
+    FIX_ENV_FILE,
     FixPackageJsonName,
     GetConfigFromUser,
     GetGithubLink,
@@ -20,6 +21,7 @@ async function InitCommand() {
         await CloneFromGithub(GithubLink, config.AppName)
         process.chdir(config.AppName)
         await FixPackageJsonName(config.AppName)
+        await FIX_ENV_FILE(config.AppName, '.env.example')
     } catch (error) {
         ErrorHandler(error)
     }
